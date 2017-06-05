@@ -20,7 +20,7 @@ module ActiveRecord
       end
 
       def touch_actable
-        return unless changed?
+        return unless saved_changes?
         acting_as.touch
       end
 
