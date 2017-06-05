@@ -10,7 +10,8 @@ module ActiveRecord
       end
 
       def changed?
-        super || acting_as.changed? || @_acting_as_changed
+        super || (acting_as.respond_to?(:saved_changes?) ? acting_as.saved_changes? : acting_as.changed?) ||
+            @_acting_as_changed
       end
 
       def acting_as_foreign_key
